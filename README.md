@@ -1,2 +1,2 @@
 # NumPy-Tutorial
-An introduction to NumPy focusing basic linear algebra and random number generation
+An introduction to NumPy focusing on applications to basic linear algebra and random number generation.
