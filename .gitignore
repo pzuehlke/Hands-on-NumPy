@@ -6,4 +6,6 @@
 *.py
 *.tex
 *.synctex.gz
+*unused*
+*trabalho*
 figure_generator.ipynb
