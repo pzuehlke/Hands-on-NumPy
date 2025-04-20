@@ -1,0 +1,1825 @@
+
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Array attributes and methods\n",
+    "\n",
+    "In this notebook we will study the fundamental _attributes_ and _methods_ of\n",
+    "NumPy arrays. Understanding the properties (_attributes_) of arrays will enable\n",
+    "us to manipulate data with more precision, while mastering the operations and\n",
+    "transformations (_methods_) that we can apply to arrays will allow us to\n",
+    "elegantly analyze and restructure our data."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## $ \\S 1 $ Attributes of arrays\n",
+    "\n",
+    "### $ 1.1 $ Shape and number of dimensions"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The __number of dimensions__, also known as the __rank__, of an array is stored\n",
+    "in its `ndim` attribute. For example, the following matrix has rank $ 2 $, because\n",
+    "it has two __axes__, one corresponding to its rows and the other one to its columns:\n",
+    "\n",
+    "<img src=\"array.svg\" width=\"500\" alt=\"Example of an array A\">"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[ 1  2  3  4]\n",
+      " [ 1  4  9 16]\n",
+      " [ 1  8 27 64]] \n",
+      "\n",
+      "Number of dimensions (rank) of A: 2\n"
+     ]
+    }
+   ],
+   "source": [
+    "A = np.array([[1, 2,  3,  4],\n",
+    "              [1, 4,  9, 16],\n",
+    "              [1, 8, 27, 64]])\n",
+    "print(A, '\\n')\n",
+    "\n",
+    "print(f\"Number of dimensions (rank) of A: {A.ndim}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Perhaps the most important property of an array is its **shape**, which is the\n",
+    "element count along each of its axes.  Referring to the preceding example, the\n",
+    "shape of our matrix $ A $ is $ (3, 4) $, or $ 3 \\times 4 $, since it has three\n",
+    "rows and four columns:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "(3, 4)\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(A.shape)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "📝 The number of dimensions of an array is a positive integer, while its shape is always a tuple, even when the array is one-dimensional:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "(3,)\n",
+      "Note that the shape is not '3', but rather the tuple '(3, )'\n",
+      "<class 'tuple'>\n"
+     ]
+    }
+   ],
+   "source": [
+    "a = np.array([11, 13, 17])\n",
+    "print(a.shape)\n",
+    "\n",
+    "print(\"Note that the shape is not '3', but rather the tuple '(3, )'\")\n",
+    "print(type(a.shape))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The __size__ of an array is simply the total number of elements in it:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "3\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(a.size)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ \n",
+    "\n",
+    "(a) What is the size of the matrix $ A $ of shape $ (3, 4) $ that we considered\n",
+    "above?\n",
+    "\n",
+    "(b) What are the rank, shape and size of an empty $ 1D $ array? An empty\n",
+    "$ 2D $ array?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ If an array has shape $ (2, 3, 4) $, what is its size? More generally, what is the size of an array of shape $ (n_1, n_2, \\cdots, n_d) $? _Hint:_ We have $ n_1 $ options for the first index, for each of these we have $ n_2 $ options for the second index, for each of these we have $ n_3 $ options for the third index, etc., hence in total we have $ \\underline{\\hspace{1cm}} $ elements."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ A _square matrix_ has the same number of rows and columns.\n",
+    "\n",
+    "(a) Write a function `is_square(A)` that accepts a $ 2D $ array as its\n",
+    "argument and returns `True` or `False` depending on whether the given matrix is\n",
+    "square or not.  _Hint:_ Use the shape to decide this.\n",
+    "\n",
+    "(b)  What is a reasonable definition of a cubic $ 3D $ array and how could we\n",
+    "check that?\n",
+    "\n",
+    "(c) How would you generalize to multidimensional arrays? _Hint:_ To verify whether\n",
+    "an array of shape $ (n_1, n_2, \\cdots, n_d) $ is \"hypercubic\" (all of its axes have\n",
+    "the same length), we can check whether\n",
+    "$$\n",
+    "\\texttt{A.shape} = (n_1, n_2, \\cdots, n_d) == (n_2, n_3, , \\cdots, n_d, n_1) = \\texttt{A.shape[1:] + (A.shape[0], )}\n",
+    "$$"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 1.2 $ Attributes and related terminology\n",
+    "\n",
+    "An instance, or __object__, of a specific class, such as the array $ A $ of type\n",
+    "`ndarray`, is equipped with a set of predefined **attributes**. Attributes are \n",
+    "_properties inherent to every instance of the class_.\n",
+    "The **state** of an object is _the set of current values of all of\n",
+    "its attributes._\n",
+    "\n",
+    "📝 To access an attribute `a` of an object `x`, the syntax is always `x.a`.\n",
+    "\n",
+    "For example, suppose that we want to design a Python class to represent cars.\n",
+    "An instance of this class would then correspond to one specific car\n",
+    "in the real world.  Some plausible attributes of this class could be:\n",
+    "* Its color (say, `color`, of type `str`).\n",
+    "* The year in which it was manufactured (say, `year`, of type `int`).\n",
+    "* Whether it is electric or not (say, `electric`, of type `boolean`).\n",
+    "* The fuel efficiency of the car (say, `kilometers_per_liter`, of type `float`).\n",
+    "\n",
+    "And so on for any other relevant property of cars that we might want to include\n",
+    "in our model. Note that the values of these attributes for different car\n",
+    "instances will vary, in general. However, from this example we can easily imagine\n",
+    "a situation where two cars have exactly the same state, as defined by their\n",
+    "set of attribute values, and yet they are distinct objects, i.e., have different\n",
+    "_identities_."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 1.3 $ The main attributes of arrays\n",
+    "\n",
+    "Although arrays come with several attributes, most of them relate to the array's\n",
+    "internal representation or low-level utilities, such as the number of bytes\n",
+    "consumed by the elements of the array. The five most frequently used and\n",
+    "conceptually important are:\n",
+    "\n",
+    "| Attribute   | Description                                    | Type      |\n",
+    "|-------------|------------------------------------------------|-----------|\n",
+    "| `ndim`      | Number of dimensions (rank) of the array  | `int`   |\n",
+    "| `shape`     | Number of elements that lie along each axis | `tuple`     |\n",
+    "| `size`      | Total number of elements in the array     | `int`   |\n",
+    "| `dtype`     | Data type of the _elements_ of the array    | `dtype`  |\n",
+    "| `T`         | Transpose of the array                    | `ndarray`    |\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ For the following arrays $ B $ and $ \\mathbf v $:\n",
+    "\n",
+    "(a) Check their attributes. Is the datatype of $ \\mathbf v $ what you expected?\n",
+    "\n",
+    "(b) Verify that the type of each attribute matches the one described in the last\n",
+    "column of the table using the Python built-in function `type`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "B = np.array([[True, False, True],\n",
+    "              [False, True, False]])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "v = np.array([1, 2, 3.])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 1.4 $ The datatype of an array\n",
+    "\n",
+    "NumPy arrays are designed to store elements of a single datatype, and _these\n",
+    "datatypes are specific to NumPy_. Many of these are based on C's native types.\n",
+    "This ensures high performance and a lighter memory footprint. As an example, the\n",
+    "datatype of the matrix $ A $ above is `int64`, which represents integers using $\n",
+    "64 $ bits. In contrast, the built-in Python type `int` can hold arbitrarily\n",
+    "large integers.\n",
+    "\n",
+    "It is also possible to work\n",
+    "with arrays of arbitrary Python objects by using the datatype `object`. Because\n",
+    "in this case what is stored in the array is only a reference to each object (not\n",
+    "the object itself), the entries don't even need to have the same Python type:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Item 0: pandas (type: <class 'str'>)\n",
+      "Item 1: [1, 2, 3] (type: <class 'list'>)\n",
+      "Item 2: (1+1j) (type: <class 'complex'>)\n"
+     ]
+    }
+   ],
+   "source": [
+    "complex_array = np.array([\"pandas\",  [1, 2, 3], 1 + 1j], dtype=object)\n",
+    "\n",
+    "for i, item in enumerate(complex_array):\n",
+    "    print(f\"Item {i}: {item} (type: {type(item)})\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To create a NumPy array with a specified datatype, we can use the `dtype`\n",
+    "parameter in any array creation function. For example:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Datatype of v: float32\n",
+      "[1. 2. 3. 4.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "v = np.array([1, 2, 3, 4], dtype=\"float32\")\n",
+    "print(f\"Datatype of v: {v.dtype}\")\n",
+    "print(v)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Note that in this form the datatype is passed as a string argument.\n",
+    "\n",
+    "__Exercise:__\n",
+    "\n",
+    "(a) Create a $ 2D $ array $ B $ of shape $ (2, 3) $ whose elements are all\n",
+    "    `True`. _Hint:_ Invoke the `ones` function \n",
+    "    with the appropriate shape and specify the `dtype=\"bool\"`.\n",
+    "\n",
+    "(b) Instantiate $ \\mathbf b = (2, 3, 4, 5) $ of type `uint32` (unsigned, $ 32\n",
+    "$-bit integer) using `linspace`.\n",
+    "\n",
+    "(c) Construct a $ 2D $ array $ C $ of shape $ (4, 2) $ in which all entries are\n",
+    "equal to $ 1 + i $, of type `complex`. _Hint:_ Use `full` and recall that\n",
+    "the imaginary unit in Python is denoted with `j`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 1.5 $ The transpose\n",
+    "\n",
+    "The `T` attribute in NumPy arrays provides a _view_ (not an independent copy) of\n",
+    "the transposed array. For $ 2D $ arrays, the __transpose__ is obtained by \n",
+    "swapping rows and columns. The transpose of a matrix is very important in\n",
+    "Linear Algebra and its applications to statistics and machine learning.\n",
+    "\n",
+    "__Exercise:__ \n",
+    "\n",
+    "(a) What is the transpose of a $ 1D $ array?\n",
+    "\n",
+    "(b) What is the transpose of a $ 3D $ array, i.e., how is it obtained from the original array?\n",
+    "    Make a conjecture and then try it out on an array of shape $ (2, 3, 4) $.\n",
+    "\n",
+    "(b) More generally, what do you think would be the most reasonable definition of the transpose of an $ n $-dimensional array?\n",
+    "    _Hint:_ Create an array of shape $ (2, 3, 4, 5) $ and inspect the shape of its transpose."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 1.6 $ Comparing two arrays for equality\n",
+    "\n",
+    "<div style=\"\n",
+    "    background-color: #fff3cd; \n",
+    "    border: 1px solid #ffeeba; \n",
+    "    border-left: 5px solid #ffc107; \n",
+    "    border-radius: 4px; \n",
+    "    color: #856404; \n",
+    "    margin: 10px 0px; \n",
+    "    padding: 15px;\">\n",
+    "    <span style=\"font-size: 24px; margin-right: 10px; vertical-align: middle;\">⚠️</span>\n",
+    "    When applied to two arrays of the same shape, the <code>==</code> operator performs an\n",
+    "    element-wise comparison and returns a Boolean array of the same shape. \n",
+    "    To check if two arrays <i>A</i> and <i>B</i> have the same\n",
+    "    shape and elements, use <code>np.array_equal(A, B)</code> instead.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[ True  True  True]\n",
+      "True\n"
+     ]
+    }
+   ],
+   "source": [
+    "a = np.array([1, 2, 3])\n",
+    "b = np.array([1, 2, 3])\n",
+    "\n",
+    "print(a == b)  # Element-wise comparison, result is an array\n",
+    "print(np.array_equal(a, b))  # Overall array equality, result is True or False"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Write a Python function to determine whether a given matrix $ A $ is\n",
+    "_symmetric_ (i.e., whether $ A^T = A $), _anti-symmetric_ ($ A^T = -A $) or neither.\n",
+    "Does your function work correctly when $ A $ is not square?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def matrix_symmetry(A):\n",
+    "    # complete"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ A square matrix $ A $ is called _orthogonal_ if it satisfies\n",
+    "$$\n",
+    "A^TA = I_n = AA^T\\,,\n",
+    "$$\n",
+    "where $ A^T $ is the transpose of $ A $ and $ I_n $ is the $ n \\times n $ identity matrix.\n",
+    "(Actually, any one of these equations by itself already suffices for orthogonality.)\n",
+    " \n",
+    "Write a procedure `is_orthogonal(A)` that makes use of this criterion to decide\n",
+    "whether $ A $ is orthogonal.  When comparing to the identity, you may want to\n",
+    "use `np.round(B, 10)` to round all entries of $ B $ to ten decimal digits to\n",
+    "avoid false negatives."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## $ \\S 2 $ Reduction and accumulation methods\n",
+    "\n",
+    "### $ 2.1 $ Methods and related terminology\n",
+    "\n",
+    "While attributes describe the properties of an object, **methods** define what\n",
+    "an object can do: they are functions that are bound to the object and that can\n",
+    "access or modify its state. Methods encapsulate behavior that is appropriate for\n",
+    "the class of objects they belong to, just as attributes encapsulate state.\n",
+    "\n",
+    "📝 To invoke a method `m` on an object `x`, the syntax is `x.m(<arguments>)`.\n",
+    "\n",
+    "Continuing the example from $ \\S 1.2 $, we could think about implementing\n",
+    "the following methods for our class representing cars:\n",
+    "* Starting the engine (say, `start_engine()`, which returns nothing but changes the car's state).\n",
+    "* Checking if maintenance is needed (say, `needs_maintenance()`, which returns a `boolean`).\n",
+    "* Refueling the car with a certain amount of gas (say, `refuel(amount)`, which returns the new fuel level as a `float`).\n",
+    "\n",
+    "In the context of NumPy arrays, methods like `sum()` perform calculations on the\n",
+    "array's data and return results, while methods like `sort()` modify the array in\n",
+    "place, without returning anything."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "v = [2 3 1]\n",
+      "Sum of the values in v: 6\n",
+      "v after sorting: [1 2 3]\n"
+     ]
+    }
+   ],
+   "source": [
+    "v = np.array([2, 3, 1])\n",
+    "print(f\"v = {v}\")\n",
+    "print(f\"Sum of the values in v: {v.sum()}\")\n",
+    "\n",
+    "v.sort()  # Sort C in-place along its last axis\n",
+    "print(f\"v after sorting: {v}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 2.2 $ Main reduction and accumulation methods\n",
+    "\n",
+    "NumPy arrays have several _reduction_ methods that transform data\n",
+    "into simpler forms.  For example, the `min` and `max` methods yield the minimum\n",
+    "and maximum elements of an array. Similarly, `argmin` and `argmax` return the\n",
+    "_index_ of the minimum and maximum elements. Here's an illustration in the\n",
+    "case of a $ 1D $ array `a`:\n",
+    "\n",
+    "<img src=\"max_min.svg\" width=\"1400\" height=\"300\" alt=\"Max and min methods\">"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "📝 When the minimum value occurs multiple times, `argmin` returns the index of\n",
+    "the first occurrence.  When called on a multidimensional array, it returns\n",
+    "the index of the minimum element of the _flattened_ ($ 1D $) version of the array:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[3 2 4]\n",
+      " [1 4 1]]\n",
+      "Argmin: 3\n",
+      "<class 'numpy.int64'>\n"
+     ]
+    }
+   ],
+   "source": [
+    "arr = np.array([[3, 2, 4], \n",
+    "                [1, 4, 1]])\n",
+    "print(arr)\n",
+    "\n",
+    "idx = arr.argmin()\n",
+    "print(f\"Argmin: {idx}\")\n",
+    "print(type(idx))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The result in this case is $ 3 $ because that's the first index of an element\n",
+    "having the minimum value $ 1 $ in the flattened array $ (3, 2, 4, 1, 4, 1) $.\n",
+    "Of course, similar comments apply to `argmax`."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Compute `min`, `max`, `argmin` and `argmax` of the following $ 2D $ array.\n",
+    "Explain the results of the two latter methods."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[2 0 3]\n",
+      " [3 1 0]\n",
+      " [1 2 0]] \n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "A = np.array([[2, 0, 3],\n",
+    "              [3, 1, 0],\n",
+    "              [1, 2, 0]])\n",
+    "print(A, '\\n')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The `sum` and `prod` are further reduction methods that compute the sum and product of\n",
+    "all the elements in an array, respectively. The `cumsum` and `cumprod` are\n",
+    "_accumulation_ methods. Instead of returning a single number, they produce an\n",
+    "array of the same shape as the original, obtained by computing the _cumulative_\n",
+    "sum and product of the entries in the array, respectively:\n",
+    "\n",
+    "<img src=\"sum_prod.svg\" width=\"1400\" height=\"300\" alt=\"Sum and product methods\">"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Verify the results in the preceding example using NumPy and directly from\n",
+    "the definitions of the methods."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Create a function that calculates compound interest using\n",
+    "`cumprod`. Given a principal amount and an array of monthly interest rates\n",
+    "(as decimal values), return the account balance after each month.\n",
+    "Test it on the values below. _Hint:_ The growth factors are given by\n",
+    "$ 1 + \\text{monthly rates} $. The balances will be the product of the\n",
+    "principal amount and the cumulative product of the growth factors."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "principal = 1000\n",
+    "monthly_rates = np.array([0.01, 0.012, 0.008, 0.011, 0.009, 0.013])\n",
+    "# balances = ???"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "📝 None of the reduction and accumulation methods perform in-place\n",
+    "transformations. Instead, they return new arrays (or numbers) with the computed\n",
+    "results while leaving the original array unchanged.\n",
+    "\n",
+    "The reduction methods `mean`, `median`, `var` and `std` provide basic\n",
+    "statistical operations which are essential for data analysis, namely,\n",
+    "they compute the (arithmetic) mean, median, variance and standard deviation\n",
+    "of the set of elements in the array, respectively. For instance:\n",
+    "\n",
+    "<img src=\"mean_median.svg\" width=\"1400\" height=\"300\" alt=\"Statistical reduction methods\">"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Recall that the __variance__ of a collection of numbers $ x_i $ is the average\n",
+    "squared deviation from the mean; it measures how spread out the values are.\n",
+    "The __standard deviation__ is simply the square root of the variance.\n",
+    "In symbols, if \n",
+    "$$\n",
+    "\\mu = \\frac{1}{n} \\sum_{i=1}^{n} x_i\n",
+    "$$\n",
+    "denotes the mean, then\n",
+    "$$\n",
+    "\\sigma^2 = \\text{Var} = \\frac{1}{n} \\sum_{i=1}^{n} (x_i - \\mu)^2 \\qquad\n",
+    "\\text{and} \\qquad \n",
+    "\\sigma = \\text{Std} = \\sqrt{\\text{Var}} = \\sqrt{\\frac{1}{n} \\sum_{i=1}^{n} (x_i - \\mu)^2}\n",
+    "$$\n",
+    "As above, the standard deviation is often denoted by $ \\sigma $.\n",
+    "\n",
+    "__Exercise:__ Verify using the definitions that the values in the preceding\n",
+    "illustration are correct."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ What are the mean, median, variance and standard deviation of an\n",
+    "array whose elements all have the same value?"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Given the $ 1D $ array below, calculate the median and standard\n",
+    "deviation of all numbers in it that are greater than $ 50 $. _Hint:_ Use a\n",
+    "boolean mask to filter the values $ > 50 $."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[86 64 52 27 31  5  8  2 18 82 65 92 51 61 98 73 64 55 56 94] ...\n"
+     ]
+    }
+   ],
+   "source": [
+    "rng = np.random.default_rng(0)\n",
+    "v = rng.integers(1, 101, size=100)\n",
+    "# First 20 elements:\n",
+    "print(v[:20], \"...\")\n",
+    "\n",
+    "# Your solution here:\n",
+    "# print(f\"\\nMean of values greater than 50: {...:.2f}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 2.3 $ Applying reduction and accumulation methods along an axis\n",
+    "\n",
+    "As an optional argument to any of these methods, we can designate an axis\n",
+    "_along which_ the sum should take place. As always in Python, indexing is\n",
+    "zero-based, meaning that for the matrix $ C $ below, the rows lie along axis $ 0\n",
+    "$ and the columns along axis $ 1 $."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "C = np.array([[2, 1, 3],\n",
+    "              [3, 2, 1]])\n",
+    "print(C.sum(axis=0))  # Sum along axis 0 (column-wise sum)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "If we think of $ C $ as the matrix $ C = (c_{ij}) $, where $ i $ is the index\n",
+    "for axis $ 0 $ (i.e., the index of rows), then taking the sum _along_ this axis\n",
+    "means that, for each $ j $, NumPy computes\n",
+    "$$ \\sum_{i} c_{ij}\n",
+    "$$\n",
+    "resulting in the preceding vector since $ C $ has three columns. To put it\n",
+    "another way, _the axis specified as the argument to `sum` is the one that gets\n",
+    "collapsed_, in this case by the summation."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Understanding how the axis parameter works is crucial;\n",
+    "this exercise will help you master this.\n",
+    "Given the matrix $ A $ in the code cell below:\n",
+    "\n",
+    "(a) Find the maximum value in each row (i.e., along the columns).\n",
+    "\n",
+    "(b) Calculate the mean (average) of each column (i.e., along the rows).\n",
+    "\n",
+    "(c) Determine the index of the maximum element in each row (i.e., along the columns).\n",
+    "\n",
+    "(d) Compute the standard deviation of the values in each row.\n",
+    "\n",
+    "(e) Find the cumulative sums for each row using the `cumsum` method. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[1 2 3 4]\n",
+      " [3 3 3 3]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "A = np.array([[1, 2, 3, 4],\n",
+    "              [3, 3, 3, 3]])\n",
+    "print(A)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "📝 It is possible to apply the methods along multiple axes by passing a tuple of\n",
+    "axes to the `axis` parameter. This performs the operation across the specified\n",
+    "dimensions simultaneously."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Apply `sum` along axes $ 1 $ and $ 2 $ of the following $ 3D $ array\n",
+    "and explain the result."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[[-12 -11 -10  -9]\n",
+      "  [ -8  -7  -6  -5]\n",
+      "  [ -4  -3  -2  -1]]\n",
+      "\n",
+      " [[  0   1   2   3]\n",
+      "  [  4   5   6   7]\n",
+      "  [  8   9  10  11]]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "M = np.arange(-12, 12).reshape(2, 3, 4)\n",
+    "print(M)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 2.4 $ Other reduction and accumulation methods\n",
+    "\n",
+    "Arrays have several more methods besides the ones discussed above. To get a listing\n",
+    "of all attributes and methods associated to an object `a` (not necessarily an\n",
+    "array), you can run the Python command `dir(a)`.  Also, in Jupyter notebooks,\n",
+    "typing `?` before or after an object or function name (e.g., `A?` or\n",
+    "`?np.array`) displays detailed documentation about it:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "A.sum?"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Here we will mention only two additional, very useful methods: `any` and `all`, which are\n",
+    "boolean reduction methods:\n",
+    "\n",
+    "* `any` returns `True` if and only if at least one element in the array is true (or non-zero).\n",
+    "   It's equivalent to an OR operation across elements.\n",
+    "* `all` returns `True` if and only if every element in the array is true (or non-zero). It's\n",
+    "   equivalent to an AND operation across elements.\n",
+    "\n",
+    "Both accept an axis argument to apply the operation along specific\n",
+    "dimensions, and both handle non-boolean arrays by treating non-zero values as\n",
+    "True."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ You have sensor readings from multiple devices collected\n",
+    "throughout the day (provided below).  Create a function that checks if any\n",
+    "sensor reported a critical value (above $ 95 $) and if all sensors remained\n",
+    "operational (above $ 0 $)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Each row of the data represents a time interval and each column a different sensor:\n",
+    "sensor_data = np.array([\n",
+    "    [45, 62, 78, 81, 56],  # Hour 0\n",
+    "    [47, 65, 76, 82, 58],  # Hour 1\n",
+    "    [52, 68, 81, 85, 61],  # Hour 2\n",
+    "    [56, 72, 85, 88, 65],  # Hour 3\n",
+    "    [62, 78, 92, 93, 71],  # Hour 4\n",
+    "    [68, 83, 96, 91, 75],  # Hour 5 - Critical value\n",
+    "    [65, 81, 93, 87, 72],  # Hour 6\n",
+    "    [60, 76, 88, 84, 69],  # Hour 7\n",
+    "    [54, 71, 82, 80, 63],  # Hour 8\n",
+    "    [51, 67, 78, 78, 59],  # Hour 9\n",
+    "    [48, 65, 75, 75, 57],  # Hour 10\n",
+    "    [46, 63, 73, 74, 54],  # Hour 11\n",
+    "    [42, 59, 69, 70, 51],  # Hour 12\n",
+    "    [39, 55, 65, 68, 48],  # Hour 13\n",
+    "    [36, 53, 61, 65, 45],  # Hour 14\n",
+    "    [32, 48, 58, 61, 41],  # Hour 15\n",
+    "    [29, 43, 54, 58, 37],  # Hour 16\n",
+    "    [25, 38, 49, 53, 33],  # Hour 17\n",
+    "    [22, 35, 44, 49, 29],  # Hour 18\n",
+    "    [18, 30, 40, 46, 25],  # Hour 19\n",
+    "    [15, 28, 37, 42, 21],  # Hour 20\n",
+    "    [13, 0, 35, 39, 18],   # Hour 21 - Sensor failure (0 value)\n",
+    "    [11, 0, 32, 36, 15],   # Hour 22 - Sensor failure (0 value)\n",
+    "    [10, 22, 30, 35, 13],  # Hour 23\n",
+    "])\n",
+    "\n",
+    "def validate_sensor_data(data, critical_threshold=95, operational_threshold=0):\n",
+    "    critical_readings = sensor_data > critical_threshold\n",
+    "    operational_sensors = sensor_data > operational_threshold\n",
+    "    # complete ..."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Given a $ 2D $ array `data` of shape $ 100 \\times 5 $ representing a\n",
+    "dataset where each row is an entry and each column corresponds to a different variable:\n",
+    "\n",
+    "(a) Calculate the mean and standard deviation of each variable.\n",
+    "\n",
+    "(b) Using `argmin`, identify the variable with the smallest variance, suggesting it has the\n",
+    "least spread."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[ 1.29289305  0.45367126 -1.69015994 -0.72819503  1.2323034 ]\n",
+      " [ 0.29833525 -0.00985894  0.44120059  0.72104895 -0.70846524]\n",
+      " [-0.29040008  0.14291365 -0.54395772 -0.13345156  1.29787176]\n",
+      " [-0.96781986  1.92666271  1.87934438 -1.71343944 -0.14102267]\n",
+      " [ 0.34269157 -0.76087109 -0.7410805  -0.2374157   0.73917809]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "data = rng.normal(size=(100, 5))\n",
+    "\n",
+    "print(data[:5])  # Display first five rows of the table\n",
+    "\n",
+    "# (a) Mean and standard deviation of each variable (column):\n",
+    "\n",
+    "# (b) Find the variable with the smallest variance:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## $ \\S 3 $ Reshaping and transforming arrays\n",
+    "\n",
+    "### $ 3.1 $ Changing the datatype\n",
+    "\n",
+    "Recall that the `dtype` attribute of an array stores its datatype. We can create\n",
+    "a new array with a different datatype from a given array by using the method\n",
+    "`astype`, provided that the datatype conversion makes sense:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[['1' '-2']\n",
+      " ['3' '-4']] \n",
+      "\n",
+      "float64 \n",
+      " [[ 1. -2.]\n",
+      " [ 3. -4.]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Let's begin by creating an array of strings:\n",
+    "A = np.array([[\"1\", \"-2\"],\n",
+    "              [\"3\", \"-4\"]])\n",
+    "print(A, '\\n')\n",
+    "\n",
+    "# Convert the datatype to double-precision (64 bit) floating-point numbers:\n",
+    "A_double = A.astype(\"float64\")\n",
+    "print(A_double.dtype, '\\n', A_double)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "📝 Note that the datatype is passed as a string. Actually these are just\n",
+    "convenient aliases for the true (NumPy) type names, such as `np.float64` and\n",
+    "`np.bool_`, which can also be passed directly.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ What happens if you try to convert a numeric array to one whose\n",
+    "datatype is `bool`? What about the converse, i.e., from `bool` to, say, `int32`?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "numbers = np.array([-2, -1, 0, 1, 2])\n",
+    "\n",
+    "bool_vals = np.array([True, False, True, True])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "📝 Although we have been speaking about the \"conversion\" from one type to another,\n",
+    "`astype` doesn't actually modify the original array; instead, it always creates a\n",
+    "_new copy_ of the original array having the prescribed datatype. This occurs\n",
+    "even when the target datatype is the same as the original.\n",
+    "\n",
+    "__Exercise:__ Prove that the two arrays $ \\mathbf{u} $ and $ \\mathbf{v} $ below\n",
+    "are independent by modifying one of them and checking that the other one\n",
+    "is unaffected."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Original u: [1 2 3] of type int64\n",
+      "Original v: [1 2 3] of type int64 \n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "u = np.array([1, 2, 3])\n",
+    "print(f\"Original u: {u} of type {u.dtype}\")\n",
+    "\n",
+    "v = u.astype(\"int64\")\n",
+    "print(f\"Original v: {v} of type {v.dtype} \\n\")\n",
+    "\n",
+    "# Modify v and check if u is affected:"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 3.2 $ Modifying the shape of arrays\n",
+    "\n",
+    "Reshaping arrays is a common and fundamental operation in NumPy. There is both\n",
+    "a function and a method named `reshape` that can accomplish this:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 62,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a = np.array([1, 2, 3, 4, 5, 6])\n",
+    "print(a, end='\\n\\n')\n",
+    "\n",
+    "A = np.reshape(a, (3, 2))  # Here we use the _function_ `reshape`\n",
+    "\n",
+    "B = a.reshape((2, 3))   # Here we use the `reshape` _method_\n",
+    "\n",
+    "print(A, end=\"\\n\\n\")  # Here a has been reshaped into a 3 by 2 matrix\n",
+    "print(B, end=\"\\n\\n\")  # Here a has been reshaped into a 2 by 3 matrix"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Note that when we reshape an array, the new shape must be compatible with the\n",
+    "size of the original array, in the sense that the size (total number of\n",
+    "elements) must remain the same. For example, the following results in an error:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "C = np.reshape(a, (2, 2))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "When reshaping, we may also specify $ -1 $ in a dimension to instruct\n",
+    "NumPy to infer the number of elements along that dimension from the size of the\n",
+    "array and that of the remaining dimensions. This is especially useful when an\n",
+    "array is passed to us by the user as an argument in a function call, but we do\n",
+    "not know in advance how many entries it has:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a = np.array([[1, 2],\n",
+    "              [3, 4]])\n",
+    "A = a.reshape((-1, 1))  # Reshape into a column vector\n",
+    "print(A)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In this example we wanted to reshape our array so that the result would have\n",
+    "one column, but didn't want to figure out how many rows it should have for that\n",
+    "to happen. Here's another example, in which we reshape a $ 1D $ array into a\n",
+    "matrix and then to a row vector:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[ 1  2  3  4  5  6  7  8  9 10 11 12]\n",
+      "\n",
+      "[[ 1  2  3  4]\n",
+      " [ 5  6  7  8]\n",
+      " [ 9 10 11 12]]\n",
+      "\n",
+      "[[ 1  2  3  4  5  6  7  8  9 10 11 12]]\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "x = np.arange(1, 13)\n",
+    "X = x.reshape((3, -1))\n",
+    "x_row = X.reshape((1, -1))\n",
+    "\n",
+    "print(x, end='\\n\\n')\n",
+    "print(X, end='\\n\\n')\n",
+    "print(x_row, end='\\n\\n')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "📝 There is no essential difference between the function and the method versions\n",
+    "of `reshape`. In both cases, NumPy returns a _new_ array, while the original\n",
+    "array remains unchanged. However, these operations provide a view of the\n",
+    "original array's data whenever possible, meaning that they do not copy the\n",
+    "array's _data_ unless necessary. Thus, modifications to the data in the reshaped\n",
+    "array can affect the original array and vice versa. Let's use the previous\n",
+    "example to illustrate this:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X[0, 0] = -23  # Modify the top left element of X\n",
+    "print(x)  # The 0th element of x has also been affected!"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To create an independent, deep copy of a NumPy array, we can use the `copy` method.\n",
+    "This method generates a new array object with the same data as the original\n",
+    "array, but stored in a separate memory location."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "y = np.arange(3)  # y is the 1D array with entries 0, 1, 2\n",
+    "Y = y.copy().reshape((1, -1))  # Reshape y into an independent 2D row vector\n",
+    "y[0] = 10  # Modify 0th element of y\n",
+    "\n",
+    "print(y)\n",
+    "print(Y)  # The 0th element of Y is not affected, since Y is an independent copy"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Given a $ 1D $ array of $ 100 $ elements, reshape it into a $ 10\n",
+    "\\times 10 $ matrix. Then, normalize the matrix so that all values are scaled to\n",
+    "lie between $ 0 $ and $ 1 $ (inclusive). _Hint:_ Determine the maximum $ M $ and\n",
+    "minimum $ m $ of all entries, write a linear function $ f $ that takes $ [m, M] $ into $ [0, 1] $\n",
+    "and then apply it to the entire array."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[400 787 316 239 791 876  79  58 671 336 573 150 860 450 894 796 705 230\n",
+      " 767  52 570 404 996 198 946  90 623 580 898 298 902 671 890 199 758 942\n",
+      "  48 365 636 105 510 629 763 927 409 440 474 954 195 499  49 425 945 620\n",
+      " 349 995 603 948  16 460 834 757 407 497 420 529 230 785  77 414 281 734\n",
+      " 749 711 924 932 184 114 132 729 970 927 668 967 871  14 119 863  82 981\n",
+      " 827 957 360 148 516 972 367 889 383 822]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Generate random array of 100 elements\n",
+    "data = rng.integers(0, 1000, size=100)\n",
+    "print(data)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 3.3 $ The `ravel` and `flatten` methods\n",
+    "\n",
+    "The `flatten` method takes a multi-dimensional array and returns a new,\n",
+    "independent _one-dimensional_ array containing all of the elements of the original\n",
+    "array. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[1 2 3 4]\n",
+      "\n",
+      "After modifying a[0]:\n",
+      "[[1 2]\n",
+      " [3 4]]\n",
+      "a = [99  2  3  4]\n"
+     ]
+    }
+   ],
+   "source": [
+    "A = np.array([[1, 2],\n",
+    "              [3, 4]])\n",
+    "a = A.flatten()  # Creates a new 1D array with a copy of data\n",
+    "print(a)\n",
+    "\n",
+    "# Let's verify it's a copy:\n",
+    "a[0] = 99\n",
+    "print(f\"\\nAfter modifying a[0]:\\n{A}\")\n",
+    "print(f\"a = {a}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The order in which the elements are placed in the flattened array is based on\n",
+    "the lexicographic ordering of their indices in the original array. For example,\n",
+    "if we are dealing with a $ 3D $ array, then the entry at position $ (0, 0, 2) $\n",
+    "comes before the entry at $ (0, 1, 0) $, which will be placed before the entry\n",
+    "at $ (1, 0, 0) $."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[0 1 2]\n",
+      " [3 4 5]]\n",
+      "[10  1  2  3  4  5]\n",
+      "[[0 1 2]\n",
+      " [3 4 5]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "A = np.arange(6).reshape((2, 3))\n",
+    "print(A)\n",
+    "\n",
+    "a = A.flatten()\n",
+    "a[0] = 10\n",
+    "\n",
+    "print(a)\n",
+    "print(A)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "NumPy provides another method called `ravel` that is similar to `flatten` but\n",
+    "with an important difference: while `flatten` always returns a deep copy of the\n",
+    "data, `ravel` returns a view when possible, which makes it more\n",
+    "memory-efficient.\n",
+    "\n",
+    "__Exercise:__ Apply `ravel` and `flatten` to the matrix $ A $ below to obtain\n",
+    "two vectors $ \\mathbf{r} $ and $ \\mathbf{f} $. Verify whether changes to\n",
+    "$ A $ affect either vector."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[1 2]\n",
+      " [3 4]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "A = np.array([[1, 2],\n",
+    "              [3, 4]])\n",
+    "print(A)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 3.4 $ Using `resize` method and function\n",
+    "\n",
+    "Unlike `reshape` which requires the total number of elements to remain the same,\n",
+    "`resize` can change the total size of an array. The `resize` method modifies the\n",
+    "array in-place, while the `np.resize` function returns a new array. If the\n",
+    "new size is greater than the old one then the _method_ fills the missing entries\n",
+    "with zeros, while the _function_ cycles through the elements of the original array:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Original a: [1 2 3 4]\n",
+      "After a.resize(6): [1 2 3 4 0 0]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Using resize method (modifies in-place), fills with 0 if necessary:\n",
+    "a = np.array([1, 2, 3, 4])\n",
+    "print(f\"Original a: {a}\")\n",
+    "\n",
+    "a.resize(6)  # Resize in-place to length 6\n",
+    "print(f\"After a.resize(6): {a}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "Original b: [1 2 3 4]\n",
+      "After np.resize(b, (2, 3)):\n",
+      "[[1 2 3]\n",
+      " [4 1 2]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Using resize function (returns new array)\n",
+    "b = np.array([1, 2, 3, 4])\n",
+    "C = np.resize(b, (2, 3))\n",
+    "\n",
+    "print(f\"\\nOriginal b: {b}\")\n",
+    "print(f\"After np.resize(b, (2, 3)):\\n{C}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 3.5 $ Combining arrays with `hstack` and `vstack`\n",
+    "\n",
+    "NumPy provides several functions to stack arrays together. The most commonly used are `hstack` (horizontal stack) and `vstack` (vertical stack)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Horizontal stack of a and b: [1 2 3 4 5 6]\n",
+      "Vertical stack of a and b:\n",
+      "[[1 2 3]\n",
+      " [4 5 6]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Creating sample arrays\n",
+    "a = np.array([1, 2, 3])\n",
+    "b = np.array([4, 5, 6])\n",
+    "\n",
+    "# Horizontal stacking (side by side):\n",
+    "h_stacked = np.hstack((a, b))\n",
+    "print(f\"Horizontal stack of a and b: {h_stacked}\")\n",
+    "\n",
+    "# Vertical stacking (one above the other):\n",
+    "v_stacked = np.vstack((a, b))\n",
+    "print(f\"Vertical stack of a and b:\\n{v_stacked}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Stack the two matrices $ A $ and $ B $ below horizontally and vertically."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "A = np.array([[1, 2], [3, 4]])\n",
+    "B = np.array([[5, 6], [7, 8]])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 3.6 $ Finding unique elements with `np.unique`\n",
+    "\n",
+    "The `np.unique` function returns the sorted unique elements of an array. It can also return counts of each unique value when the `return_counts` parameter is set to `True`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Original array: [3 1 4 1 5 9 2 6 5 3 5]\n",
+      "\n",
+      "Unique elements: [1 2 3 4 5 6 9]\n",
+      "\n",
+      "Unique elements: [1 2 3 4 5 6 9]\n",
+      "Counts:          [2 1 2 1 3 1 1]\n"
+     ]
+    }
+   ],
+   "source": [
+    "data = np.array([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])\n",
+    "print(f\"Original array: {data}\")\n",
+    "\n",
+    "# Get unique elements:\n",
+    "unique_elements = np.unique(data)\n",
+    "print(f\"\\nUnique elements: {unique_elements}\")\n",
+    "\n",
+    "# Get unique elements and their counts:\n",
+    "unique_elements, counts = np.unique(data, return_counts=True)\n",
+    "print(f\"\\nUnique elements: {unique_elements}\")\n",
+    "print(f\"Counts: {str(counts):>24}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Use `argmax` to find the most common element in the array `data` of the preceding example."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 3.7 $ Flipping arrays with `np.flip`\n",
+    "\n",
+    "The `np.flip` function reverses the order of elements in an array along a specified axis. It always\n",
+    "returns a new, independent array, not a view of the original."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Create a 1D array:\n",
+    "a = np.array([1, 2, 3, 4, 5])\n",
+    "print(f\"Original array: {a}\")\n",
+    "print(f\"Flipped array: {np.flip(a)}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Given the $ 2D $ array $ A $ below:\n",
+    "\n",
+    "(a) Flip $ A $ along its $ 0 $-th axis using `flip` with the argument `axis=0`.\n",
+    "\n",
+    "(b) Flip the columns of $ A $.\n",
+    "\n",
+    "(c) Flip both axes of $ A $ by using `flip` without providing an `axis` argument.\n",
+    "\n",
+    "(d) Can you accomplish the same results using slices of type `::-1`? What is the difference?\n",
+    "_Hint:_ What happens if you modify the flipped array, is the original one affected?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "Original 2D array:\n",
+      "[[1 2 3]\n",
+      " [4 5 6]\n",
+      " [7 8 9]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Create a 2D array\n",
+    "A = np.array([[1, 2, 3],\n",
+    "              [4, 5, 6],\n",
+    "              [7, 8, 9]])\n",
+    "\n",
+    "print(f\"\\nOriginal 2D array:\\n{A}\")\n",
+    "\n",
+    "# (a) Flip along axis 0 (rows):\n",
+    "\n",
+    "# (b) Flip along axis 1 (columns):\n",
+    "\n",
+    "# (c) Flip along both axes:"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ The $ 2D $ of shape $ 28 \\times 28 $ in the code cell below\n",
+    "represents a grayscale image. Write a function to rotate this image $ 90 $ degrees\n",
+    "clockwise.\n",
+    "\n",
+    "_Hint_: This can be accomplished by first transposing the array and then\n",
+    "flipping it vertically (i.e., reversing the order of the entries along each\n",
+    "column) with an appropriate slice or using `flip`. This is illustrated in the\n",
+    "$ 3 \\times 3 $ example below, but the same idea works in any dimension.\n",
+    "$$\n",
+    "\\begin{bmatrix}\n",
+    "a & b & c \\\\\n",
+    "d & e & f \\\\\n",
+    "g & h & i \\\\\n",
+    "\\end{bmatrix}\n",
+    "\\overset{\\text{transpose}}{\\longrightarrow}\n",
+    "\\begin{bmatrix}\n",
+    "a & d & g \\\\\n",
+    "b & e & h \\\\\n",
+    "c & f & i \\\\\n",
+    "\\end{bmatrix}\n",
+    "\\overset{\\text{flip ver.}}{\\longrightarrow}\n",
+    "\\begin{bmatrix}\n",
+    "g & d & a \\\\\n",
+    "h & e & b \\\\\n",
+    "i & f & c \\\\\n",
+    "\\end{bmatrix}\n",
+    "$$"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[209 215 215 107 109]\n",
+      " [139 143 115 203  34]\n",
+      " [180 127  65  62 170]\n",
+      " [  5 237  66 204  48]\n",
+      " [206 217  69 153  58]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "image = np.array(rng.integers(0, 256, size=(28, 28)))\n",
+    "print(image[:5, :5])\n",
+    "\n",
+    "def rotate_90_clockwise(img):\n",
+    "    \"\"\" Rotate a 2D array 90 degrees clockwise.  \"\"\""
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### $ 3.8 $ The `squeeze` method\n",
+    "\n",
+    "The `squeeze` method removes single-dimensional entries (axes with length $ 1 $)\n",
+    "from the shape of an array. For example, an array of shape $ (1, 3, 1) $ becomes\n",
+    "$ (3,) $ after squeezing. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Create array with shape (1, 3, 1, 2):\n",
+    "A = np.array([[[[1, 2]], [[3, 4]], [[5, 6]]]])\n",
+    "print(A.shape)  # (1, 3, 1, 2)\n",
+    "\n",
+    "# Remove single-dimensional axes:\n",
+    "B = A.squeeze()\n",
+    "print(B.shape)  # (3, 2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Some key characteristics of `squeeze`:\n",
+    "* It returns a view of the input array, not a copy.\n",
+    "* Without arguments, it removes all single-dimensional axes.\n",
+    "* With the axis parameter, it can removes only specific single-dimensional axes.\n",
+    "* Raises a `ValueError` if you try to squeeze an axis of size $ > 1 $."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "__Exercise:__ Squeeze out axis $ 2 $ of the array $ A $ in the preceding example to obtain\n",
+    "an array $ C $. Then modify an element of $ C $ and check whether $ A $ is affected."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "islp",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
