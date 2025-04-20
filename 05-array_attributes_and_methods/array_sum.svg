@@ -42,9 +42,9 @@
   
   <!-- Axis arrows -->
   <!-- Axis 0 (rows) - vertical black arrow on the left -->
-  <line x1="90" y1="100" x2="90" y2="250" stroke="#000000" stroke-width="3" />
-  <polygon points="90,270 85,250 95,250" fill="#000000" />
-  <text x="60" y="180" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" transform="rotate(270 60 180)">axis 0 (rows)</text>
+  <line x1="100" y1="92" x2="100" y2="250" stroke="#000000" stroke-width="3" />
+  <polygon points="100,270 95,250 105,250" fill="#000000" />
+  <text x="70" y="200" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" transform="rotate(270 60 180)">axis 0 (rows)</text>
   
   <!-- Sum operation for axis=0 -->
   <text x="240" y="310" text-anchor="middle" font-family="monospace" font-size="22" fill="#000000">.sum(axis=0) =</text>
@@ -65,9 +65,9 @@
   <text x="455" y="190" text-anchor="middle" font-family="monospace" font-size="22" fill="#000000">.sum(axis=1) = </text>
   
   <!-- Sum result column for axis=1 - using a gradient of darker purples -->
-  <rect x="570" y="90" width="60" height="60" fill="#d8b2d8" stroke="#ffffff" stroke-width="2" />
-  <rect x="570" y="150" width="60" height="60" fill="#c080c0" stroke="#ffffff" stroke-width="2" />
-  <rect x="570" y="210" width="60" height="60" fill="#a040a0" stroke="#ffffff" stroke-width="2" />
+  <rect x="570" y="90" width="60" height="60" fill="#E6E4D9" stroke="#ffffff" stroke-width="2" />
+  <rect x="570" y="150" width="60" height="60" fill="#CCC9B3" stroke="#ffffff" stroke-width="2" />
+  <rect x="570" y="210" width="60" height="60" fill="#B3AB8C" stroke="#ffffff" stroke-width="2" />
   
   <!-- Sum values for axis=1 -->
   <text x="600" y="130" text-anchor="middle" font-family="Arial" font-size="20">10</text>
