@@ -1,0 +1,94 @@
+<svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Coolwarm gradient -->
+    <linearGradient id="coolwarm" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b4cc0"/>
+      <stop offset="25%" stop-color="#7b9ff9"/>
+      <stop offset="50%" stop-color="#f7f7f7"/>
+      <stop offset="75%" stop-color="#f66866"/>
+      <stop offset="100%" stop-color="#b40426"/>
+    </linearGradient>
+    
+    <!-- Cell styles -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="3" stdDeviation="2" flood-opacity="0.3"/>
+    </filter>
+    
+    <!-- Arrow markers -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+  
+  <!-- Global styles -->
+  <style>
+    text {
+      font-family: 'Arial', sans-serif;
+      dominant-baseline: middle;
+      text-anchor: middle;
+    }
+    .array-label {
+      font-size: 16px;
+      font-weight: bold;
+      fill: #333;
+    }
+    .operation {
+      font-size: 24px;
+      font-weight: bold;
+      fill: #333;
+    }
+    .arrow-line {
+      stroke: #333;
+      stroke-width: 1.5;
+      marker-end: url(#arrowhead);
+    }
+  </style>
+  
+  <!-- Array a (3) -->
+  <g transform="translate(30, 80)">
+    <text x="60" y="-20" class="array-label">a (3)</text>
+    
+    <!-- Single row -->
+    <rect x="0" y="0" width="40" height="40" fill="#7b9ff9" stroke="#333" filter="url(#shadow)"/>
+    <text x="20" y="20" font-size="16">1</text>
+    <rect x="40" y="0" width="40" height="40" fill="#bad6f9" stroke="#333" filter="url(#shadow)"/>
+    <text x="60" y="20" font-size="16">2</text>
+    <rect x="80" y="0" width="40" height="40" fill="#f7d8ab" stroke="#333" filter="url(#shadow)"/>
+    <text x="100" y="20" font-size="16">3</text>
+  </g>
+  
+  <!-- Array b (1) -->
+  <g transform="translate(220, 80)">
+    <text x="20" y="-20" class="array-label">b (1)</text>
+    
+    <!-- Single element -->
+    <rect x="0" y="0" width="40" height="40" fill="#bad6f9" stroke="#333" filter="url(#shadow)"/>
+    <text x="20" y="20" font-size="16">2</text>
+    <rect x="40" y="0" width="40" height="40" rx="5" fill="#eee" stroke="#ccc" opacity="0.3"/>
+    <rect x="80" y="0" width="40" height="40" rx="5" fill="#eee" stroke="#ccc" opacity="0.3"/>
+    
+    <!-- Stretch arrow -->
+    <line x1="60" y1="20" x2="100" y2="20" class="arrow-line"/>
+    <text x="80" y="40" font-size="12" fill="#444">stretch</text>
+  </g>
+  
+  <!-- Operation sign -->
+  <text x="170" y="100" class="operation">×</text>
+  <text x="350" y="100" class="operation">=</text>
+  
+  <!-- Result array (3) -->
+  <g transform="translate(400, 80)">
+    <text x="60" y="-20" class="array-label">result (3)</text>
+    
+    <!-- Result row -->
+    <rect x="0" y="0" width="40" height="40" fill="#bad6f9" stroke="#333" filter="url(#shadow)"/>
+    <text x="20" y="20" font-size="16">2</text>
+    <rect x="40" y="0" width="40" height="40" fill="#f7d8ab" stroke="#333" filter="url(#shadow)"/>
+    <text x="60" y="20" font-size="16">4</text>
+    <rect x="80" y="0" width="40" height="40" fill="#f29d7d" stroke="#333" filter="url(#shadow)"/>
+    <text x="100" y="20" font-size="16">6</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="300" y="170" font-size="14" text-anchor="middle" fill="#555">Broadcasting: Multiplying a (3) array by a (1) array with horizontal stretching</text>
+</svg>

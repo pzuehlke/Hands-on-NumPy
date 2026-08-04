@@ -1,0 +1,146 @@
+<svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Coolwarm gradient -->
+    <linearGradient id="coolwarm" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b4cc0"/>
+      <stop offset="25%" stop-color="#7b9ff9"/>
+      <stop offset="50%" stop-color="#f7f7f7"/>
+      <stop offset="75%" stop-color="#f66866"/>
+      <stop offset="100%" stop-color="#b40426"/>
+    </linearGradient>
+    
+    <!-- Value-based color definitions -->
+    <linearGradient id="color-scale" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b4cc0"/> <!-- Bluest for 0 -->
+      <stop offset="100%" stop-color="#b40426"/> <!-- Reddest for 33 -->
+    </linearGradient>
+    
+    <!-- Cell styles -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="3" stdDeviation="2" flood-opacity="0.3"/>
+    </filter>
+    
+    <!-- Arrow markers -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+  
+  <!-- Global styles -->
+  <style>
+    text {
+      font-family: 'Arial', sans-serif;
+      dominant-baseline: middle;
+      text-anchor: middle;
+    }
+    .array-label {
+      font-size: 16px;
+      font-weight: bold;
+      fill: #333;
+    }
+    .operation {
+      font-size: 24px;
+      font-weight: bold;
+      fill: #333;
+    }
+    .arrow-line {
+      stroke: #333;
+      stroke-width: 1.5;
+      marker-end: url(#arrowhead);
+    }
+  </style>
+  
+  <!-- Array a (4x1) -->
+  <g transform="translate(30, 40)">
+    <text x="20" y="-20" class="array-label">a (4×1)</text>
+    
+    <!-- Row 1 -->
+    <rect x="0" y="0" width="40" height="40" fill="#3b4cc0" stroke="#333" filter="url(#shadow)"/>
+    <text x="20" y="20" font-size="16" fill="white">0</text>
+    <rect x="40" y="0" width="40" height="40" rx="5" fill="#eee" stroke="#ccc" opacity="0.3"/>
+    <rect x="80" y="0" width="40" height="40" rx="5" fill="#eee" stroke="#ccc" opacity="0.3"/>
+    
+    <!-- Row 2 -->
+    <rect x="0" y="40" width="40" height="40" fill="#6577dd" stroke="#333" filter="url(#shadow)"/>
+    <text x="20" y="60" font-size="16" fill="white">10</text>
+    <rect x="40" y="40" width="40" height="40" rx="5" fill="#eee" stroke="#ccc" opacity="0.3"/>
+    <rect x="80" y="40" width="40" height="40" rx="5" fill="#eee" stroke="#ccc" opacity="0.3"/>
+    
+    <!-- Row 3 -->
+    <rect x="0" y="80" width="40" height="40" fill="#8f64a0" stroke="#333" filter="url(#shadow)"/>
+    <text x="20" y="100" font-size="16" fill="white">20</text>
+    <rect x="40" y="80" width="40" height="40" rx="5" fill="#eee" stroke="#ccc" opacity="0.3"/>
+    <rect x="80" y="80" width="40" height="40" rx="5" fill="#eee" stroke="#ccc" opacity="0.3"/>
+    
+    <!-- Row 4 -->
+    <rect x="0" y="120" width="40" height="40" fill="#b85163" stroke="#333" filter="url(#shadow)"/>
+    <text x="20" y="140" font-size="16" fill="white">30</text>
+    <rect x="40" y="120" width="40" height="40" rx="5" fill="#eee" stroke="#ccc" opacity="0.3"/>
+    <rect x="80" y="120" width="40" height="40" rx="5" fill="#eee" stroke="#ccc" opacity="0.3"/>
+    
+    <!-- Stretch arrow -->
+    <line x1="130" y1="80" x2="170" y2="80" class="arrow-line"/>
+    <text x="150" y="65" font-size="12" fill="#444">stretch</text>
+  </g>
+  
+  <!-- Array b (3) -->
+  <g transform="translate(200, 80)">
+    <text x="60" y="-20" class="array-label">b (3)</text>
+    
+    <!-- Single row -->
+    <rect x="0" y="0" width="40" height="40" fill="#3f4bbb" stroke="#333" filter="url(#shadow)"/>
+    <text x="20" y="20" font-size="16" fill="white">1</text>
+    <rect x="40" y="0" width="40" height="40" fill="#424ab6" stroke="#333" filter="url(#shadow)"/>
+    <text x="60" y="20" font-size="16" fill="white">2</text>
+    <rect x="80" y="0" width="40" height="40" fill="#4649b2" stroke="#333" filter="url(#shadow)"/>
+    <text x="100" y="20" font-size="16" fill="white">3</text>
+    
+    <!-- Stretch arrow -->
+    <line x1="60" y1="50" x2="60" y2="90" class="arrow-line"/>
+    <text x="75" y="70" font-size="12" fill="#444">stretch</text>
+  </g>
+  
+  <!-- Operation sign -->
+  <text x="175" y="100" class="operation">+</text>
+  <text x="320" y="100" class="operation">=</text>
+  
+  <!-- Result array (4x3) -->
+  <g transform="translate(360, 40)">
+    <text x="60" y="-20" class="array-label">result (4×3)</text>
+    
+    <!-- Row 1 -->
+    <rect x="0" y="0" width="40" height="40" fill="#3f4bbb" stroke="#333" filter="url(#shadow)"/>
+    <text x="20" y="20" font-size="16" fill="white">1</text>
+    <rect x="40" y="0" width="40" height="40" fill="#424ab6" stroke="#333" filter="url(#shadow)"/>
+    <text x="60" y="20" font-size="16" fill="white">2</text>
+    <rect x="80" y="0" width="40" height="40" fill="#4649b2" stroke="#333" filter="url(#shadow)"/>
+    <text x="100" y="20" font-size="16" fill="white">3</text>
+    
+    <!-- Row 2 -->
+    <rect x="0" y="40" width="40" height="40" fill="#6873d2" stroke="#333" filter="url(#shadow)"/>
+    <text x="20" y="60" font-size="16" fill="white">11</text>
+    <rect x="40" y="40" width="40" height="40" fill="#6c72cd" stroke="#333" filter="url(#shadow)"/>
+    <text x="60" y="60" font-size="16" fill="white">12</text>
+    <rect x="80" y="40" width="40" height="40" fill="#7071c9" stroke="#333" filter="url(#shadow)"/>
+    <text x="100" y="60" font-size="16" fill="white">13</text>
+    
+    <!-- Row 3 -->
+    <rect x="0" y="80" width="40" height="40" fill="#925f95" stroke="#333" filter="url(#shadow)"/>
+    <text x="20" y="100" font-size="16" fill="white">21</text>
+    <rect x="40" y="80" width="40" height="40" fill="#955e91" stroke="#333" filter="url(#shadow)"/>
+    <text x="60" y="100" font-size="16" fill="white">22</text>
+    <rect x="80" y="80" width="40" height="40" fill="#995d8d" stroke="#333" filter="url(#shadow)"/>
+    <text x="100" y="100" font-size="16" fill="white">23</text>
+    
+    <!-- Row 4 -->
+    <rect x="0" y="120" width="40" height="40" fill="#bb4c59" stroke="#333" filter="url(#shadow)"/>
+    <text x="20" y="140" font-size="16" fill="white">31</text>
+    <rect x="40" y="120" width="40" height="40" fill="#bf4b55" stroke="#333" filter="url(#shadow)"/>
+    <text x="60" y="140" font-size="16" fill="white">32</text>
+    <rect x="80" y="120" width="40" height="40" fill="#b40426" stroke="#333" filter="url(#shadow)"/>
+    <text x="100" y="140" font-size="16" fill="white">33</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="300" y="220" font-size="14" text-anchor="middle" fill="#555">Broadcasting: Adding a (4×1) array to a (3) array produces a (4×3) result</text>
+</svg>
